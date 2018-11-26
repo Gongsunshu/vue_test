@@ -20,9 +20,9 @@ export default {
   },
   methods:{
     login:function () {
-      this.$http.post('http://127.0.0.1:8080/ordercenter/formlogin', querystring.stringify({
-        username: 'AGYKF001',
-        password: '123',
+      this.$http.post('', querystring.stringify({
+        username: '',
+        password: '',
         yzm:'',
         random:Math.random(),
       })).then(function (response) {

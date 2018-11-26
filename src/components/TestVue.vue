@@ -18,7 +18,7 @@
     data: function () {
       return {
         table_box_config: {
-          url: 'http://127.0.0.1:8080/ordercenter/orderTransfer/dataRows',//table数据查询接口
+          url: '',//table数据查询接口
           undefinedText: '',//当数据为 undefined 时显示的字符，所有的数据统一设置
           id: true,//是否显示序列号，默认是1，2，3，4，也可以是数据中的某一个property
           columns: [
@@ -81,87 +81,7 @@
           //
           //   }
           // },//异步从后台取出数据时，需要是函数，返回total_page与rows；
-          data: [{
-            "custAddr": "山东省枣庄市中区山东省枣庄市市中区文化路街道文化东路国泰花园[FTTH]",
-            "custName": "王国强",
-            "custPhone": "18606420767",
-            "custType": "实体轻触点",
-            "gsd": "枣庄",
-            "orderId": "20181102192117965303",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省枣庄市中区山东省枣庄市市中区国泰花园1-1-101",
-            "custName": "邓晓宁",
-            "custPhone": "15562225306",
-            "custType": "实体轻触点",
-            "gsd": "枣庄",
-            "orderId": "20181102230718089347",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省枣庄市中区山东省枣庄市市中区文化路街道文化东路国泰花园[FTTH]",
-            "custName": "邓晓宁",
-            "custPhone": "15562225306",
-            "custType": "实体轻触点",
-            "gsd": "枣庄",
-            "orderId": "20181102231418089966",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省聊城",
-            "custName": "刘霞",
-            "custPhone": "15965753216",
-            "custType": "实体轻触点",
-            "gsd": "聊城",
-            "orderId": "20181103090218341867",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省枣庄市中区山东省枣庄市市中区文化路街道文化东路国泰花园[FTTH]",
-            "custName": "邓晓宁",
-            "custPhone": "15562225306",
-            "custType": "实体轻触点",
-            "gsd": "枣庄",
-            "orderId": "20181103094718423153",
-            "orderSrc": "实体轻触点",
-          }, {
-            "custAddr": "山东省德州山东省德州",
-            "custName": "李志刚",
-            "custPhone": "19862030115",
-            "custType": "实体轻触点",
-            "gsd": "德州",
-            "orderId": "20181103100418465919",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省济宁邹城市山东省济宁市邹城市太平西路联通营业厅东中网电讯",
-            "custName": "宋坤",
-            "custPhone": "15505479007",
-            "custType": "社会渠道代理商",
-            "gsd": "济宁",
-            "orderId": "20181103104918607269",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省青岛0532",
-            "custName": "潘凯旋",
-            "custPhone": "13260333724",
-            "custType": "实体轻触点",
-            "gsd": "青岛",
-            "orderId": "20181103112718714769",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省聊城高唐县山东省聊城市高唐县政通路烟草专卖局",
-            "custName": "王峰",
-            "custPhone": "15653173998",
-            "custType": "集客轻触点",
-            "gsd": "聊城",
-            "orderId": "20181103130418885156",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "山东省烟台0535",
-            "custName": "周巧娟",
-            "custPhone": "15589542300",
-            "custType": "门店商户",
-            "gsd": "烟台",
-            "orderId": "20181103140718984767",
-            "orderSrc": "沃扫码",
-          }
+          data: [
           ],
           async: false,//是否异步从后端加载数据
           showRefresh: true,//是否显示刷新按钮
