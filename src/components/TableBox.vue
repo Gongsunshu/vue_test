@@ -3,7 +3,7 @@
     <div class="inner" v-if="!!navButton && Object.keys(navButton).length !== 0">
       <nav class="nav nav-button-nav">
         <input type="button" class="button button-tiny nav-button" v-for="(n,i) in navButton" :class="n.class"
-                :style="n.style" @click="n.action(checked, data_rows)" name="" :value="n.name" :name="i" @click.stop/>
+               :style="n.style" @click="n.action(checked, data_rows)" name="" :value="n.name" :name="i" @click.stop/>
 
       </nav>
     </div>
@@ -28,13 +28,13 @@
         </thead>
         <tbody>
         <tr v-for="(item, index) in table_td_data" @click="clickToSelectSingle(index)" :value="index">
-          <td v-if="choose">
+          <td v-if="choose && item.length !== 0">
             <input type="checkbox" :value="checked[index]" :checked="checked[index]"/>
           </td>
           <td v-for="(i,s) in item" v-if="s<table_title.length" v-html="i">
             {{i}}
           </td>
-          <td v-if="menu">
+          <td v-if="menu && item.length !== 0">
             <div class="row-deal-td">
               <input type="button" v-for="m in menu.menuGroup" :value="m.name" @click="m.action(item,index)" @click.stop
                      :class="m.class" class="button button-tiny oper-button" :style="m.style"/>
@@ -44,8 +44,8 @@
         </tbody>
       </table>
     </div>
-      <!--操作插槽-->
-      <!--<slot name="oper"></slot>-->
+    <!--操作插槽-->
+    <!--<slot name="oper"></slot>-->
     <div class="troot" v-if="init_data_success">
       总共{{total_page}}页，当前是第<i class="i-text">{{cur_page}}</i>页
     </div>
@@ -53,13 +53,16 @@
       <span class="pagination">
         <a href="#" aria-label="Previous" @click="next_page(cur_page-1)">&laquo;</a>
       </span>
-      <span v-for="c in total_page" v-bind:class="{pagination:clicked===0, pagination_clicked:clicked===c}" class="pagination" v-if="c<11">
+      <span v-for="c in total_page" v-bind:class="{pagination:clicked===0, pagination_clicked:clicked===c}"
+            class="pagination" v-if="c<11">
         <a href="javascript:void(0);" v-on:click="next_page(c)">{{c}}</a>
       </span>
-      <span v-for="c in total_page" v-bind:class="{pagination:clicked===0,pagination_clicked:clicked===c}" class="pagination" v-if="c>=11 && c<13">
+      <span v-for="c in total_page" v-bind:class="{pagination:clicked===0,pagination_clicked:clicked===c}"
+            class="pagination" v-if="c>=11 && c<13">
         ..
       </span>
-      <span v-for="c in total_page" v-bind:class="{pagination:clicked===0,pagination_clicked:clicked===c}" class="pagination"
+      <span v-for="c in total_page" v-bind:class="{pagination:clicked===0,pagination_clicked:clicked===c}"
+            class="pagination"
             v-if="c === total_page && c>=13">
         <a href="javascript:void(0);" v-on:click="next_page(c)" :value="c">{{c}}</a>
       </span>
@@ -96,7 +99,7 @@
         total_page: 0,
         table_title: [],
         choose: [],
-        is_choose_all:false,
+        is_choose_all: false,
         skip_page: false,
         data_rows: {
           type: [],
@@ -104,10 +107,10 @@
         checked: '',
         clickToSelect: false,
         init_data_success: false,
-        menu:{},
-        init_data_error:'',
-        table_extra_style:{},
-        navButton:{},
+        menu: {},
+        init_data_error: '',
+        table_extra_style: {},
+        navButton: {},
       };
     },
     computed: {//计算属性
@@ -120,7 +123,7 @@
           let columns = this.config.columns;
           let table_title_length = columns.length;
           let rows_length = cur_rows.length;
-          for (let i =0;i< rows_length;i++){
+          for (let i = 0; i < rows_length; i++) {
             Vue.set(this.checked, i, false);
           }
           for (let i = 0; i < table_title_length; i++) {
@@ -134,23 +137,24 @@
               }
               rr = rrd[j];
               let tr;
-              if (!!cur_rows[j][k]) {
-                if (!!columns[i]['formatter'] && typeof columns[i]['formatter'] === 'function') {
-                  tr = columns[i]['formatter'](cur_rows[j][k], j, cur_rows);
+              if (!!cur_rows[j]) {
+                if (!!cur_rows[j][k]) {
+                  if (!!columns[i]['formatter'] && typeof columns[i]['formatter'] === 'function') {
+                    tr = columns[i]['formatter'](cur_rows[j][k], j, cur_rows);
+                  } else {
+                    tr = cur_rows[j][k];
+                  }
                 } else {
-                  tr = cur_rows[j][k];
+                  if (!!columns[i]['default']) {
+                    tr = columns[i]['default'];
+                  } else if (!!this.config.undefinedText) {
+                    tr = this.config.undefinedText;
+                  } else {
+                    tr = '..';
+                  }
                 }
-              } else {
-                if (!!columns[i]['default']) {
-                  tr = columns[i]['default'];
-                } else if (!!this.config.undefinedText) {
-                  tr = this.config.undefinedText;
-                } else {
-                  tr = '..';
-                }
+                rr.push(tr);
               }
-
-              rr.push(tr);
               rrd[j] = rr;
             }
           }
@@ -164,11 +168,11 @@
     },
     methods: {
       next_page: function (c) {
-        if (c<1){
+        if (c < 1) {
           c = 1;
         }
 
-        if (c>this.total_page){
+        if (c > this.total_page) {
           c = this.total_page;
         }
 
@@ -181,10 +185,9 @@
         // this.$emit('next_page_listen',{skip_page:c}); $emit 通过父组件上监听器，向父组件传值
       },
       query_table_rows: function (params) {//如果异步加载数据
-        if (!!this.config.ajax && this.config.ajax instanceof Function){
-          console.log(params);
+        if (!!this.config.ajax && this.config.ajax instanceof Function) {
           this.config.ajax(params);
-        }else{
+        } else {
           if (this.config.async) {//
             let data = Qs.stringify(params);
             let axios_config = {
@@ -237,17 +240,17 @@
         }
       },
       chooseAll: function () {
-        for (let i = 0; i< this.checked.length; i++) {
-          if (this.is_choose_all){//已经被全选的，取消全选
+        for (let i = 0; i < this.checked.length; i++) {
+          if (this.is_choose_all) {//已经被全选的，取消全选
             Vue.set(this.checked, i, false);
-          }else{
+          } else {
             Vue.set(this.checked, i, true);
           }
         }
         this.is_choose_all = !this.is_choose_all;
       },
       clickToSelectSingle: function (index) {
-        if (this.clickToSelect){
+        if (this.clickToSelect) {
           Vue.set(this.checked, index, !this.checked[index]);
         }
       },
@@ -257,22 +260,22 @@
         this.choose = !!this.config.choose;
         this.clickToSelect = !!this.config.clickToSelect;
         this.init_data_success = true;
-        if (globalUtils.objectEmpty(this.config.rowMenu)){
-          this.menu =this.config.rowMenu;
+        if (globalUtils.objectEmpty(this.config.rowMenu)) {
+          this.menu = this.config.rowMenu;
         }
 
-        if (globalUtils.objectEmpty(this.config.ext_style)){
+        if (globalUtils.objectEmpty(this.config.ext_style)) {
           this.table_extra_style = this.config.ext_style;
         }
 
-        if (globalUtils.objectEmpty(this.config.navButton)){
+        if (globalUtils.objectEmpty(this.config.navButton)) {
           this.navButton = this.config.navButton;
         }
       },
     },
     mounted: function () {
       this.page_size = !!this.config.page_size ? this.config.page_size : this.page_size;
-      this.clickToSelect = this.config.clickToSelect?this.config.clickToSelect: this.clickToSelect;
+      this.clickToSelect = this.config.clickToSelect ? this.config.clickToSelect : this.clickToSelect;
       let params = this.config.params;
       params['pageSize'] = this.page_size;
       params['page'] = this.cur_page;
@@ -280,10 +283,10 @@
       //初始化属性，与状态有关的属性全部置为初始值，根据之后的状态再进行改变
       this.query_table_rows(params);
     },
-    render:function (createElement) {
-      return createElement('',{
-        methods:{
-          objectEmpty:function(object){
+    render: function (createElement) {
+      return createElement('', {
+        methods: {
+          objectEmpty: function (object) {
             globalUtils.objectEmpty(object);
           }
         }
@@ -331,6 +334,7 @@
     text-decoration: none;
     color: #ff0000;
   }
+
   .pagination a:hover {
     color: #0056b3;
     text-decoration: none;
@@ -347,6 +351,7 @@
   .pagination a:not(:disabled):not(.disabled) {
     cursor: pointer;
   }
+
   div > input[type=text] {
     width: 22px;
     height: auto;
@@ -364,7 +369,7 @@
     font-weight: normal;
   }
 
-  .skip_page_button input:hover{
+  .skip_page_button input:hover {
     color: #0056b3;
     text-decoration: none;
     background-color: #e9ecef;
@@ -404,7 +409,7 @@
     color: #4cb0f9;
   }
 
-  .oper-button{
+  .oper-button {
     margin: 0 0 0 5px;
 
   }
@@ -414,30 +419,37 @@
     position: relative;
     left: 50%;
   }
+
   .inner {
     position: relative;
     left: -50%;
   }
 
-  .nav-button{
+  .nav-button {
     margin: auto 5px 5px 5px;
   }
 
-  .error_tr{
+  .error_tr {
     width: 100%;
     color: red;
     font-size: 2em;
     text-align: center;
   }
 
-  .row-deal-td{
+  .row-deal-td {
     display: inline-flex;
     height: 100%;
     vertical-align: middle;
     text-align: center;
   }
 
-  .nav-button-nav{
+  .nav-button-nav {
     /*display: flex;*/
+  }
+
+  .table-lt {
+    width: 800px;
+    table-layout:fixed;
+    word-break:break-all;
   }
 </style>

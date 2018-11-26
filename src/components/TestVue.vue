@@ -23,7 +23,7 @@
           id: true,//是否显示序列号，默认是1，2，3，4，也可以是数据中的某一个property
           columns: [
             {
-              text: '归属地', id: 'gsd',
+              text: '归属地', id: 'gsd',height:100,width:80,
               menu: [{// 每一行的操作按
                 text: '操作',
                 action: function (d, index, row) {
@@ -39,29 +39,29 @@
               },
             },
             {
-              text: '详细地址', id: 'custAddr', menu: {
+              text: '详细地址', id: 'custAddr', height:100,width:80, menu: {
                 text: '操作', action: function () {
                 }
               },
             },
             {
-              text: '角色', id: 'custType', menu: function f() {
+              text: '角色', id: 'custType',height:100,width:80, menu: function f() {
               },
             },
             {
-              text: '顾客名', id: 'custName', menu: function f() {
+              text: '顾客名', id: 'custName',height:100,width:80, menu: function f() {
               },
             },
             {
-              text: '手机号码', id: 'custPhone', menu: function f() {
+              text: '手机号码', id: 'custPhone',height:100,width:80, menu: function f() {
               },
             },
             {
-              text: '来源', id: 'orderSrc', menu: function f() {
+              text: '来源', id: 'orderSrc',height:100,width:80, menu: function f() {
               },
             },
             {
-              text: '订单号', id: 'orderId', menu: function f() {
+              text: '订单号', id: 'orderId',height:100,width:80, menu: function f() {
               },
             },
           ],//table 具体标题
@@ -86,7 +86,7 @@
             "custName": "全进口",
             "custPhone": "1289812938912",
             "custType": "1891892",
-            "gsd": "枣庄",
+            "gsd": "德州",
             "orderId": "201811261615281289129",
             "orderSrc": "省考江苏看",
           },{
@@ -94,7 +94,15 @@
             "custName": "全进口",
             "custPhone": "1289812938912",
             "custType": "1891892",
-            "gsd": "枣庄",
+            "gsd": "淄博",
+            "orderId": "201811261615281289129",
+            "orderSrc": "省考江苏看",
+          }, {
+            "custAddr": "阿斯建档立卡手机类的",
+            "custName": "全进口",
+            "custPhone": "1289812938912",
+            "custType": "1891892",
+            "gsd": "聊城",
             "orderId": "201811261615281289129",
             "orderSrc": "省考江苏看",
           }, {
@@ -110,17 +118,25 @@
             "custName": "全进口",
             "custPhone": "1289812938912",
             "custType": "1891892",
-            "gsd": "枣庄",
+            "gsd": "滨州",
             "orderId": "201811261615281289129",
             "orderSrc": "省考江苏看",
           }, {
-            "custAddr": "山东省枣庄市中区山东省枣庄市市中区文化路街道文化东路国泰花园[FTTH]",
-            "custName": "邓晓宁",
-            "custPhone": "15562225306",
-            "custType": "实体轻触点",
-            "gsd": "枣庄",
-            "orderId": "20181103094718423153",
-            "orderSrc": "实体轻触点",
+            "custAddr": "阿斯建档立卡手机类的",
+            "custName": "全进口",
+            "custPhone": "1289812938912",
+            "custType": "1891892",
+            "gsd": "日照",
+            "orderId": "201811261615281289129",
+            "orderSrc": "省考江苏看",
+          }, {
+            "custAddr": "阿斯建档立卡手机类的",
+            "custName": "全进口",
+            "custPhone": "1289812938912",
+            "custType": "1891892",
+            "gsd": "泰安",
+            "orderId": "201811261615281289129",
+            "orderSrc": "省考江苏看",
           }, {
             "custAddr": "阿斯建档立卡手机类的",
             "custName": "全进口",
@@ -134,31 +150,47 @@
             "custName": "全进口",
             "custPhone": "1289812938912",
             "custType": "1891892",
-            "gsd": "枣庄",
+            "gsd": "济宁",
             "orderId": "201811261615281289129",
             "orderSrc": "省考江苏看",
           }, {
-            "custAddr": "山东省青岛0532",
-            "custName": "潘凯旋",
-            "custPhone": "13260333724",
-            "custType": "实体轻触点",
+            "custAddr": "阿斯建档立卡手机类的",
+            "custName": "全进口",
+            "custPhone": "1289812938912",
+            "custType": "1891892",
+            "gsd": "烟台",
+            "orderId": "201811261615281289129",
+            "orderSrc": "省考江苏看",
+          },{
+            "custAddr": "阿斯建档立卡手机类的",
+            "custName": "全进口",
+            "custPhone": "1289812938912",
+            "custType": "1891892",
+            "gsd": "东营",
+            "orderId": "201811261615281289129",
+            "orderSrc": "省考江苏看",
+          },{
+            "custAddr": "阿斯建档立卡手机类的",
+            "custName": "全进口",
+            "custPhone": "1289812938912",
+            "custType": "1891892",
+            "gsd": "潍坊",
+            "orderId": "201811261615281289129",
+            "orderSrc": "省考江苏看",
+          },{
+            "custAddr": "阿斯建档立卡手机类的",
+            "custName": "全进口",
+            "custPhone": "1289812938912",
+            "custType": "1891892",
             "gsd": "青岛",
-            "orderId": "20181103112718714769",
-            "orderSrc": "沃扫码",
-          }, {
-            "custAddr": "阿斯建档立卡手机类的",
-            "custName": "全进口",
-            "custPhone": "1289812938912",
-            "custType": "1891892",
-            "gsd": "枣庄",
             "orderId": "201811261615281289129",
             "orderSrc": "省考江苏看",
-          }, {
-            "custAddr": "阿斯建档立卡手机类的",
-            "custName": "全进口",
+          },{
+            "custAddr": "奥斯卡拉斯",
+            "custName": "贷记卡",
             "custPhone": "1289812938912",
             "custType": "1891892",
-            "gsd": "枣庄",
+            "gsd": "临沂",
             "orderId": "201811261615281289129",
             "orderSrc": "省考江苏看",
           }],
