@@ -1,0 +1,48 @@
+.DS_Store
+/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/test/unit/coverage/
+/test/e2e/reports/
+selenium-debug.log
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+BrowserMetrics/
+BrowserMetrics-spare.pma
+build/
+CertificateRevocation/
+CertificateTransparency/
+Crashpad/
+CrashpadMetrics-active.pma
+Default/
+dist/
+FileTypePolicies/
+First Run
+InterventionPolicyDatabase/
+Local State
+lockfile
+MEIPreload/
+node_modules/
+OriginTrials/
+package-lock.json
+PepperFlash/
+pnacl/
+Safe Browsing/
+Safe Browsing Channel IDs
+Safe Browsing Channel IDs-journal
+Safe Browsing Cookies
+Safe Browsing Cookies-journal
+ShaderCache/
+SSLErrorAssistant/
+Subresource Filter/
+SwReporter/
+view.iml
+WidevineCdm/
