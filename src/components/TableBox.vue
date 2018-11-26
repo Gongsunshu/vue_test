@@ -1,12 +1,17 @@
 <template>
-  <div class="table_body wrap">
-    <div class="inner">
-      <nav class="navbar navbar-default">
-        <button type="button" class="button button-tiny nav-button">refresh</button>
+  <div class="table-body-div wrap" v-if="init_data_success">
+    <div class="inner" v-if="!!navButton && Object.keys(navButton).length !== 0">
+      <nav class="nav nav-button-nav">
+        <input type="button" class="button button-tiny nav-button" v-for="(n,i) in navButton" :class="n.class"
+                :style="n.style" @click="n.action(checked, data_rows)" name="" :value="n.name" :name="i" @click.stop/>
+
       </nav>
     </div>
     <div>
-      <table class="table-sm table-striped table-bordered table-hover table-lt inner">
+      <table class="table-sm table-striped table-bordered table-hover table-lt inner" :style="table_extra_style">
+        <tr v-if="!!init_data_error">
+          <td class="error_tr">error</td>
+        </tr>
         <thead>
         <tr>
           <th v-if="choose && init_data_success" class="menu">
@@ -30,8 +35,10 @@
             {{i}}
           </td>
           <td v-if="menu">
-            <input type="button" v-for="m in menu.menuGroup" :value="m.name" @click="m.action(item,index)" @click.stop
-                   :class="m.class" class="button button-tiny oper-button" :style="m.style"/>
+            <div class="row-deal-td">
+              <input type="button" v-for="m in menu.menuGroup" :value="m.name" @click="m.action(item,index)" @click.stop
+                     :class="m.class" class="button button-tiny oper-button" :style="m.style"/>
+            </div>
           </td>
         </tr>
         </tbody>
@@ -98,6 +105,9 @@
         clickToSelect: false,
         init_data_success: false,
         menu:{},
+        init_data_error:'',
+        table_extra_style:{},
+        navButton:{},
       };
     },
     computed: {//计算属性
@@ -140,26 +150,13 @@
                 }
               }
 
-              //对于行操作按钮的处理
-              if (!!columns[i]['menu'] && columns[i]['menu'] instanceof Array){
-                for (let m in columns[i]['menu']){
-                  addRowOperMenu(m);
-                }
-              }
-
               rr.push(tr);
               rrd[j] = rr;
             }
           }
           this.table_td_data = rrd;
           //在数据初始化加载完成后，相关配置初始化
-          this.skip_page = !!this.config.skip_page;
-          this.choose = !!this.config.choose;
-          this.clickToSelect = !!this.config.clickToSelect;
-          this.init_data_success = true;
-          if (!!this.config.rowMenu && this.config.rowMenu instanceof Object){
-            this.menu =this.config.rowMenu;
-          }
+          this.init_table_config();
         },
         immediate: false,
         deep: false,
@@ -185,6 +182,7 @@
       },
       query_table_rows: function (params) {//如果异步加载数据
         if (!!this.config.ajax && this.config.ajax instanceof Function){
+          console.log(params);
           this.config.ajax(params);
         }else{
           if (this.config.async) {//
@@ -211,7 +209,7 @@
                 }
               }
             ).catch(function (error) {
-              console.log(error);
+              this.init_data_error = error;
               //查询失败，所有的组件都不显示
               this.checked = [];
               this.skip_page = false;
@@ -252,7 +250,25 @@
         if (this.clickToSelect){
           Vue.set(this.checked, index, !this.checked[index]);
         }
-      }
+      },
+      init_table_config: function () {
+        //在数据初始化加载完成后，相关配置初始化
+        this.skip_page = !!this.config.skip_page;
+        this.choose = !!this.config.choose;
+        this.clickToSelect = !!this.config.clickToSelect;
+        this.init_data_success = true;
+        if (globalUtils.objectEmpty(this.config.rowMenu)){
+          this.menu =this.config.rowMenu;
+        }
+
+        if (globalUtils.objectEmpty(this.config.ext_style)){
+          this.table_extra_style = this.config.ext_style;
+        }
+
+        if (globalUtils.objectEmpty(this.config.navButton)){
+          this.navButton = this.config.navButton;
+        }
+      },
     },
     mounted: function () {
       this.page_size = !!this.config.page_size ? this.config.page_size : this.page_size;
@@ -263,15 +279,16 @@
       params = globalUtils.expandProperty(params, this.config.params);
       //初始化属性，与状态有关的属性全部置为初始值，根据之后的状态再进行改变
       this.query_table_rows(params);
+    },
+    render:function (createElement) {
+      return createElement('',{
+        methods:{
+          objectEmpty:function(object){
+            globalUtils.objectEmpty(object);
+          }
+        }
+      })
     }
-  }
-
-  /**
-   * 增加行操作按钮，返回一个render
-   * @param menu_config 关于操作按钮的配置
-   */
-  function addRowOperMenu(menu_config) {
-
   }
 </script>
 
@@ -369,7 +386,7 @@
     position: relative;
   }
 
-  .table_body {
+  .table-body-div {
     display: inline;
     width: auto;
     align-items: center;
@@ -388,7 +405,8 @@
   }
 
   .oper-button{
-    margin: auto 5px auto 5px;
+    margin: 0 0 0 5px;
+
   }
 
   .wrap {
@@ -402,6 +420,24 @@
   }
 
   .nav-button{
-    margin: auto 5px auto -1%;
+    margin: auto 5px 5px 5px;
+  }
+
+  .error_tr{
+    width: 100%;
+    color: red;
+    font-size: 2em;
+    text-align: center;
+  }
+
+  .row-deal-td{
+    display: inline-flex;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .nav-button-nav{
+    /*display: flex;*/
   }
 </style>

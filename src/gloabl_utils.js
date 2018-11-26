@@ -2,7 +2,7 @@
  * 根据数据总量，计算总页数
  */
 function computeTotalPage(total, page_size) {
-  return Math.ceil(total/page_size);
+  return Math.ceil(total / page_size);
 }
 
 /**
@@ -11,10 +11,10 @@ function computeTotalPage(total, page_size) {
  * @param newObject
  * @returns {*}
  */
-function expandProperty(oldObject, newObject){
-  if (!!newObject && typeof newObject === 'object'){
-    for (let k in newObject){
-      if (newObject.hasOwnProperty(k)){
+function expandProperty(oldObject, newObject) {
+  if (!!newObject && typeof newObject === 'object') {
+    for (let k in newObject) {
+      if (newObject.hasOwnProperty(k)) {
         oldObject[k] = newObject[k];
       }
     }
@@ -22,6 +22,18 @@ function expandProperty(oldObject, newObject){
   return oldObject;
 }
 
+/**
+ * 判断一个对象是否是空对象
+ * @param objects
+ */
+function objectEmpty(objects) {
+  if (!!objects && objects instanceof Object && Object.keys(objects).length !== 0) {
+    return true;
+  }else{
+    return false;
+  }
+}
+
 export {
-  computeTotalPage,expandProperty
+  computeTotalPage, expandProperty,objectEmpty
 }
