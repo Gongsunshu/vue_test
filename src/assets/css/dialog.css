@@ -1,0 +1,23 @@
+.dialog-mask{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  background-color: silver;
+  z-index: 9999;
+}
+
+.dialog-container{
+  position: fixed;
+  width: 300px;
+  height: 150px;
+  left: 45%;
+  top: 25%;
+  /*background-color: #ccc6c6;*/
+  z-index: 10001;
+  border-radius: 5%;
+  border: #4cb0f9 1px solid;
+  background-color: hsla(0,0%, 100% ,.9);
+}

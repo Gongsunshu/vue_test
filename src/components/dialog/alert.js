@@ -2,33 +2,27 @@ import Vue from 'vue';
 import alert from './alert.vue';
 
 let htmlBody = document.body;
-export default function showAlert(text,title='提示', menu_value='确认'){
-  return new Promise((resolve,reject)=>{
+export default function showAlert(config) {
+  return new Promise((resolve, reject) => {
     let vm = null;
     let alertSettings = {
-      name:'alertSettings',
-      data:function(){
+      name: 'alertSettings',
+      data: function () {
         return {
-          'config':{
-            title: title,
-            text: text,
-            menu_value: menu_value,
-            type:0,
-            style:{},
-            beforeDestroy:function () {
-
-            },
-            destroyed:function () {
-
-            },
-          }
+          config: {
+            title: !!config.title ? config.title : '确认',
+            okText: !!config.okText ? config.okText : '确定',
+            content: '测试测试测试测试',
+            type: !!config.type ? config.type : 0,
+            beforeDestroy: !!config.beforeDestroy ? config.beforeDestroy : null,
+            destroyed: !!config.destroyed ? config.destroyed : null,
+            okAction: !!config.okAction ? config.okAction : null,
+          },
         }
       },
-      methods:{
-        confirm() {
-          console.log('弹出框消失');
-          this.show = false;
-          resolve(true);
+      methods: {
+        confirm: function () {
+          resolve();
           dialogClose(vm);
         }
       },
@@ -46,7 +40,7 @@ export default function showAlert(text,title='提示', menu_value='确认'){
  * 删除这个弹出框，并且在vue实例中销毁
  * @param vm 弹出框实例
  */
-function dialogClose(vm){
+function dialogClose(vm) {
   htmlBody.removeChild(vm.$el);
   vm.$destroy();
 }

@@ -34,6 +34,19 @@ function objectEmpty(objects) {
   }
 }
 
+/**
+ * 判断一个对象的类型是不是给定的类型
+ * @param ele 一个对象
+ * @param type 给定的类型
+ */
+function judgeType(ele, type) {
+  if (!!ele && ele instanceof type){
+    return true;
+  }else{
+    return false
+  }
+}
+
 export {
-  computeTotalPage, expandProperty,objectEmpty
+  computeTotalPage, expandProperty,objectEmpty,judgeType
 }

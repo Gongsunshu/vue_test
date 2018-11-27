@@ -80,7 +80,7 @@
   import Qs from 'qs';
   import Vue from 'vue'
 
-  var globalUtils = require('./../gloabl_utils');
+  let globalUtils = require('./../gloabl_utils');
 
   export default {
     name: "TableBox",

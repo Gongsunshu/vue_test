@@ -7,6 +7,8 @@
 
 <script>
   import TableBox from "./TableBox";
+  import showAlert from "./../components/dialog/alert.js";
+  import showConfirm from "./../components/dialog/confirm.js";
 
   export default {
     name: "TestVue",
@@ -212,20 +214,28 @@
               name: '详情',
               action: function (row, index) {
                 //具体动作，选中某一行之后进行的操作
-                console.log(row);
-                console.log(index);
+                showAlert({
+                  okAction:function (param) {
+                    console.log(row);
+                  },
+                });
               },
               class: ['button-action'],//按钮样式， button-action button-primary button-highlight button-caution button-royal
               style: {
                 // 'color':'red',
               },//额外的样式
-            },
-              {//导航栏的操作按钮
+            }, {
                 name: '添加',
                 action: function (row, index) {
                   //具体动作，选中某一行之后进行的操作
-                  console.log(row);
-                  console.log(index);
+                  showConfirm({
+                    okAction:function (param) {
+                      console.log(param);
+                    },
+                    cancelAction:function (param) {
+                      console.log(param);
+                    }
+                  });
                 },
                 class: ['button-highlight'],//按钮样式， button-action button-primary button-highlight button-caution button-royal
                 style: {

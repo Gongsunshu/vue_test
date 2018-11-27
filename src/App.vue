@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img :src="img" v-on:click="login">
+    <img :src="img">
     <TestVue v-bind:height="height"></TestVue>
   </div>
 </template>
@@ -30,6 +30,9 @@ export default {
       }).catch(function (error) {
         console.log(error);
       })
+    },
+    con: function () {
+
     }
   },
   components: {TestVue},
