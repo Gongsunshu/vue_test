@@ -16,7 +16,7 @@
 <script>
   let globalUtils = require('./../../gloabl_utils');
   export default {
-    name: "confirm",
+    name: "confirmdialog",
     props: {
       config: {
         title: {
@@ -62,12 +62,12 @@
       }
     },
     beforeDestroy: function () {
-      if (!!this.config.beforeDestroy && this.config.beforeDestroy instanceof Function) {
+      if (globalUtils.judgeType(this.config.beforeDestroy, Function)) {
         return this.config.beforeDestroy(this);
       }
     },
     destroyed: function () {
-      if (!!this.config.destroyed() && this.config.destroyed instanceof Function) {
+      if (globalUtils.judgeType(this.config.destroyed, Function)) {
         return this.config.destroyed(this);
       }
     }

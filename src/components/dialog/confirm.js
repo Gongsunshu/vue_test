@@ -1,10 +1,13 @@
 import Vue from 'vue';
-import confirm from './Confirm.vue';
+import confirmdialog from './Confirm.vue';
 
 let htmlBody = document.body;
 export default function showConfirm(config) {
+  console.log(confirmdialog);
   let vm = null;
   let confirmSettings = {
+    template: '<confirmdialog @confirm="confirm" :config="config"></confirmdialog>',
+    components: {confirmdialog},
     name: 'confirmSettings',
     data: function () {
       return {
@@ -26,8 +29,6 @@ export default function showConfirm(config) {
         dialogClose(vm);
       }
     },
-    template: '<comfirm @confirm="confirm" :config="config"></comfirm>',
-    components: {confirm},
   };
   //创建一个vue元素，并挂载到一个元素上 Vue.extend() 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。
   let factory = Vue.extend(confirmSettings);

@@ -230,10 +230,10 @@
                   //具体动作，选中某一行之后进行的操作
                   showConfirm({
                     okAction:function (param) {
-                      console.log(param);
+                      console.log(row);
                     },
                     cancelAction:function (param) {
-                      console.log(param);
+                      console.log(index);
                     }
                   });
                 },

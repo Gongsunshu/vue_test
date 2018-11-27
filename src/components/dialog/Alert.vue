@@ -3,11 +3,12 @@
     <div class="dialog-mask">
     </div>
     <div class="dialog-container">
-      <div class="dialog-top"><label>{{config.title}}</label></div>
-      <div class="dialog-content" v-html="config.content">{{config.content}}</div><!--可以接受带样式的文本 -->
-      <div class="dialog-bottom">
-        <input type="button" class="dialog-button button button-tiny" @click="ok" :value="config.okText">
-        <!-- 确认按钮，父组件可监听confirm事件 -->
+      <div class="list-group">
+        <div class="list-group-item dialog-top">{{config.title}}</div>
+        <div class="list-group-item tab-content" v-html="config.content">{{config.content}}</div>
+        <div class="modal-footer">
+          <input type="button" class="dialog-button button button-tiny" @click="ok" :value="config.okText">
+        </div>
       </div>
     </div>
   </div>
@@ -63,15 +64,20 @@
   @import './../../assets/css/dialog.css';
 
   .dialog {
-
+    display: grid;
   }
 
   .dialog-content {
-
+    height: 70%;
+    position: absolute;
+    top: 25%;
   }
 
   .dialog-bottom {
-    margin: 0 0 0 0;
+    position: absolute;
+    height: 15%;
+    top: 83%;
+    width: 100%;
   }
 
   .dialog-button {
@@ -81,11 +87,15 @@
 
   .dialog-top {
     position: relative;
-    padding: 0 0 0 5%;
-    border-radius: 5%;
-    margin: 0 0 5px 0;
+    height: 25%;
+    /*top: 0;*/
+    /*padding: 0 0 0 5%;*/
+    /*border-radius: 5%;*/
+    /*margin: 0 0 5px 0;*/
     font: 1.2em Arial, Tahoma, Verdana;
-    color: #c8c1cc;
-    background-color: #9df7f7;
+    /*color: #c8c1cc;*/
+    background-color: #ccc6c6;
+    /*width: 100%;*/
+    /*border-top: #4cb0f9 1px solid;*/
   }
 </style>
