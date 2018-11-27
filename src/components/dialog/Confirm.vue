@@ -1,12 +1,12 @@
 <template>
   <div class="dialog">
-    <div class="dialog-mask">
-    </div>
+    <div class="dialog-mask"></div>
     <div class="dialog-container">
       <div class="dialog-top"><label>{{config.title}}</label></div>
       <div class="dialog-content" v-html="config.content">{{config.content}}</div><!--可以接受带样式的文本 -->
       <div class="dialog-bottom">
-        <input type="button" class="dialog-button button button-tiny" @click="ok" :value="config.okText">
+        <input type="button" class="dialog-button button button-tiny" @click="confirm(true)" :value="config.okText">
+        <input type="button" class="dialog-button button button-tiny" @click="confirm(false)" :value="config.cancelText">
         <!-- 确认按钮，父组件可监听confirm事件 -->
       </div>
     </div>
@@ -15,9 +15,8 @@
 
 <script>
   let globalUtils = require('./../../gloabl_utils');
-
   export default {
-    name: "alert",
+    name: "confirm",
     props: {
       config: {
         title: {
@@ -28,10 +27,12 @@
           type: String,
           required: true,
         },
-        type:{
+        cancelText: {
+          type:String,
+        },
+        styleType:{
           type:Number,
         },
-        content:'',
         beforeDestroy: function () {//弹出框销毁前回调，参数是当前弹出框组件实例
 
         },
@@ -41,27 +42,37 @@
         okAction:function () {
 
         },
+        cancelAction:function () {
+
+        }
       },
     },
     methods: {
-      ok: function () {
-        this.$emit('confirm', true);
-        if (globalUtils.judgeType(this.config.okAction, Function)) {
-          return this.config.okAction(true);
+      confirm: function (okOrCancel) {
+        if (okOrCancel){
+          if (globalUtils.judgeType(this.config.okAction, Function)){
+            this.config.okAction(okOrCancel);
+          }
+        }else{
+          if (globalUtils.judgeType(this.config.okAction, Function)){
+            this.config.cancelAction(okOrCancel);
+          }
         }
+        this.$emit('confirm', okOrCancel);
       }
     },
     beforeDestroy: function () {
-      if (globalUtils.judgeType(this.config.beforeDestroy, Function)) {
+      if (!!this.config.beforeDestroy && this.config.beforeDestroy instanceof Function) {
         return this.config.beforeDestroy(this);
       }
     },
     destroyed: function () {
-      if (globalUtils.judgeType(this.config.destroyed, Function)) {
-        return this.config.destroyed();
+      if (!!this.config.destroyed() && this.config.destroyed instanceof Function) {
+        return this.config.destroyed(this);
       }
     }
   }
+
 </script>
 
 <style scoped>
@@ -83,8 +94,7 @@
   }
 
   .dialog-button {
-    position: absolute;
-    left: 25%;
+
   }
 
   .dialog-top {
