@@ -9,7 +9,7 @@ export default function showAlert(config) {
     data: function () {
       return {
         config: {
-          title: !!config.title ? config.title : '确认',
+          title: !!config.title ? config.title : '提示',
           okText: !!config.okText ? config.okText : '确定',
           content: '测试测试测试测试',
           styleType: !!config.type ? config.type : 0,

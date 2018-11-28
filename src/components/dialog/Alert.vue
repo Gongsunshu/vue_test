@@ -2,12 +2,16 @@
   <div class="dialog">
     <div class="dialog-mask">
     </div>
-    <div class="dialog-container">
-      <div class="list-group">
-        <div class="list-group-item dialog-top">{{config.title}}</div>
-        <div class="list-group-item tab-content" v-html="config.content">{{config.content}}</div>
-        <div class="modal-footer">
-          <input type="button" class="dialog-button button button-tiny" @click="ok" :value="config.okText">
+    <div class="dialog-container container">
+      <div class="row">
+        <div class="col-md-12 dialog-top">{{config.title}}</div>
+        <div class="col-md-12 dialog-content" >
+          <p v-html="config.content">
+            {{config.content}}
+          </p>
+        </div>
+        <div class="col-md-12 dialog-bottom">
+          <input type="button" class="dialog-button button button-action button-rounded button-small" @click="ok" :value="config.okText">
         </div>
       </div>
     </div>
@@ -27,13 +31,13 @@
         okText: {
           type: String,
         },
-        styleType:{
-          type:Number,
+        styleType: {
+          type: Number,
         },
-        content:'',
+        content: '',
         beforeDestroy: null,//弹出框销毁前回调，参数是当前弹出框组件实例
         destroyed: null,
-        okAction:null,
+        okAction: null,
       },
     },
     methods: {
@@ -69,33 +73,37 @@
 
   .dialog-content {
     height: 70%;
+    width: 100%;
     position: absolute;
-    top: 25%;
+    top: 12%;
+    border-top: 1px #b5cccc solid;
   }
 
   .dialog-bottom {
-    position: absolute;
-    height: 15%;
-    top: 83%;
+    height: 20%;
     width: 100%;
+    position: absolute;
+    top: 80%;
+    border-top: 1px #b5cccc solid;
+    padding: 2% 8% 0 0;
+    background: #d2d8bc;
   }
 
   .dialog-button {
-    position: absolute;
-    left: 25%;
+    float: right;
+    background-color: #b8c7cc;
+  }
+
+  .dialog-button:hover {
+    background-color: #5856ff;
   }
 
   .dialog-top {
     position: relative;
-    height: 25%;
-    /*top: 0;*/
-    /*padding: 0 0 0 5%;*/
-    /*border-radius: 5%;*/
-    /*margin: 0 0 5px 0;*/
-    font: 1.2em Arial, Tahoma, Verdana;
-    /*color: #c8c1cc;*/
-    background-color: #ccc6c6;
-    /*width: 100%;*/
-    /*border-top: #4cb0f9 1px solid;*/
+    height: 15%;
+    width: 100%;
+    padding: 5px 0 5px 20px;
+    font: 1em Arial, Tahoma, Verdana;
+    background-color: #d2d8bc;
   }
 </style>

@@ -9,6 +9,7 @@
   import TableBox from "./TableBox";
   import showAlert from "./../components/dialog/alert.js";
   import showConfirm from "./../components/dialog/confirm.js";
+  let globalUtils = require('./../gloabl_utils');
 
   export default {
     name: "TestVue",
@@ -234,6 +235,14 @@
                     },
                     cancelAction:function (param) {
                       console.log(index);
+                      console.log(globalUtils.judgeType([],Array));
+                      console.log(globalUtils.judgeType({},Object));
+                      console.log(globalUtils.judgeType(null,Object));
+                      console.log(globalUtils.judgeType(undefined,Object));
+                      console.log(globalUtils.judgeType(undefined,Object));
+                      console.log(globalUtils.judgeType('',String));
+                      console.log(globalUtils.judgeType(0,Number));
+                      console.log(globalUtils.judgeType(function () {},Function));
                     }
                   });
                 },

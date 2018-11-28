@@ -43,7 +43,10 @@ function judgeType(ele, type) {
   if (!!ele && ele instanceof type){
     return true;
   }else{
-    return false
+    type = type && type.toString().match(/^\s*function (\w+)/);
+    type = type? type[1] : '';
+    type = type.toLowerCase();
+    return typeof ele === type;
   }
 }
 
