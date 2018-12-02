@@ -113,7 +113,7 @@
             "custName": "全进口",
             "custPhone": "1289812938912",
             "custType": "1891892",
-            "gsd": "枣庄",
+            "gsd": "菏泽",
             "orderId": "201811261615281289129",
             "orderSrc": "省考江苏看",
           }, {
@@ -219,6 +219,8 @@
                   okAction:function (param) {
                     console.log(row);
                   },
+                  // width:'500px',
+                  // height:'380px',
                 });
               },
               class: ['button-action'],//按钮样式， button-action button-primary button-highlight button-caution button-royal
@@ -242,6 +244,7 @@
                       console.log(globalUtils.judgeType(undefined,Object));
                       console.log(globalUtils.judgeType('',String));
                       console.log(globalUtils.judgeType(0,Number));
+                      console.log(globalUtils.judgeType(false,Boolean));
                       console.log(globalUtils.judgeType(function () {},Function));
                     }
                   });

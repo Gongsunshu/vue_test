@@ -21,6 +21,8 @@ export default function showConfirm(config) {
           destroyed: !!config.destroyed ? config.destroyed : null,
           okAction: !!config.okAction ? config.okAction : null,
           cancelAction: !!config.cancelAction ? config.cancelAction : null,
+          width:config.width || '350px',
+          height:config.height || '250px',
         }
       }
     },

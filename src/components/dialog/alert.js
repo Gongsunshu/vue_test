@@ -16,6 +16,9 @@ export default function showAlert(config) {
           beforeDestroy: !!config.beforeDestroy ? config.beforeDestroy : null,
           destroyed: !!config.destroyed ? config.destroyed : null,
           okAction: !!config.okAction ? config.okAction : null,
+          width:config.width || '350px',
+          height:config.height || '250px',
+          style:config.style || null,
         },
       }
     },

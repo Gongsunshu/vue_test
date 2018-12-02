@@ -11,8 +11,6 @@
 
 .dialog-container{
   position: fixed;
-  width: 350px;
-  height: 250px;
   left: 45%;
   top: 25%;
   /*background-color: #ccc6c6;*/

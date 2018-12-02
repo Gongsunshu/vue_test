@@ -12,7 +12,7 @@ function computeTotalPage(total, page_size) {
  * @returns {*}
  */
 function expandProperty(oldObject, newObject) {
-  if (!!newObject && typeof newObject === 'object') {
+  if (!!newObject && typeof judgeType(newObject, Object)) {
     for (let k in newObject) {
       if (newObject.hasOwnProperty(k)) {
         oldObject[k] = newObject[k];
